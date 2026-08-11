@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CoinPickUp : NetworkBehaviour
@@ -18,18 +19,33 @@ public class CoinPickUp : NetworkBehaviour
 
         if (collision.GetComponent<NetworkIdentity>().isOwned)
         {
-            Debug.LogError("isOwned");
+            Debug.LogWarning("isOwned");
         }
+
+        Debug.LogError(NetworkClient.spawned.ElementAt(0).Value.gameObject);
+
 
         foreach (var (key,value) in NetworkClient.spawned)
         {
+
             if (value.TryGetComponent<CoinCounter>(out coinCounter))
             {
+                Debug.LogWarning("isFound");
                 break;
+
             }
         }
 
+            
+        try
+        {
             coinCounter.AddCoinSend(collision.GetComponent<NetworkIdentity>().connectionToClient);
+        }
+        catch 
+        {
+
+            Debug.LogError("coinCounter.AddCoinSend(collision.GetComponent<NetworkIdentity>().connectionToClient) is not working");
+        }
             NetworkServer.Destroy(gameObject);
 
 
