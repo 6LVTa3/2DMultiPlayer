@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class CoinEmmiter : NetworkBehaviour
 {
-    [SerializeField] private CoinCounter coinCounter;
+
     [SerializeField] private NetworkIdentity coinPrefab;
     private NetworkIdentity coin;
+    private CoinCounter coinCounter;
 
-    
+    public void init(CoinCounter coinCounter)
+    {
+        this.coinCounter = coinCounter;
+
+    }
 
 
     private void Update()
