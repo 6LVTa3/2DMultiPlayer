@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class CoinCounter : NetworkBehaviour
 {
+    [SerializeField] private UIScore prefabUIScore;
+
+    private UIScore uiScore;
     private TextMeshProUGUI scoreText;
     private Dictionary<NetworkConnectionToClient, int> playerScores;
     private int count;
@@ -23,6 +26,8 @@ public class CoinCounter : NetworkBehaviour
     {
 
             playerScores = new Dictionary<NetworkConnectionToClient, int>();
+        Debug.Log(NetworkClient.spawned.Count + " Count");
+        uiScore = Instantiate(prefabUIScore);
     }
   
    public void AddPlayerCounter(NetworkConnectionToClient client)
@@ -58,5 +63,11 @@ public class CoinCounter : NetworkBehaviour
     private void AddCoinRecive(NetworkConnectionToClient client, int score)
     {
         Debug.Log(score); 
+        uiScore.UpdateScore(score);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(uiScore.gameObject);
     }
 }

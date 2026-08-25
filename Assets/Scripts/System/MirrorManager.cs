@@ -52,12 +52,16 @@ public class MirrorManager : NetworkManager
         {
             if (item.gameObject.TryGetComponent<CoinCounter>(out coinCounter))
             {
+                coinCounter.Init(scoreText);
+                Debug.Log("CoinCounter Inited");
                 break;
             }
         }
 
 
-  //      coinCounter.Init(scoreText);
+
     }
+
+    
     
 }
