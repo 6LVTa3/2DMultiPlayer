@@ -1,5 +1,6 @@
 using Mirror;
 using System;
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,8 +11,10 @@ public class MirrorManager : NetworkManager
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private CoinCounter coinCounterPrefab;
     [SerializeField] private CoinEmmiter coinEmmiterPrefab;
-     private CoinCounter coinCounter;
-     private CoinEmmiter coinEmmiter;
+    [SerializeField] private EnemyEmmiter enemyEmmiterPrefab;
+    private CoinCounter coinCounter;
+    private CoinEmmiter coinEmmiter;
+    private EnemyEmmiter enemyEmmiter;
 
 
     public override void OnStartServer()
@@ -26,13 +29,16 @@ public class MirrorManager : NetworkManager
         NetworkServer.Spawn(coinEmmiter.gameObject);
 
         coinEmmiter.init(coinCounter);
+
+        enemyEmmiter = Instantiate(enemyEmmiterPrefab);
+        NetworkServer.Spawn(enemyEmmiter.gameObject);
     }
     public override void OnServerConnect(NetworkConnectionToClient conn)
     {
         
         base.OnServerConnect(conn);
-
-        coinCounter.AddPlayerCounter(conn);
+        StartCoroutine(AddPlayer(conn));
+    
 
     }
 
@@ -62,6 +68,14 @@ public class MirrorManager : NetworkManager
 
     }
 
+    private IEnumerator AddPlayer(NetworkConnectionToClient conn)
+    {
+        while (coinCounter == null)
+        {
+            yield return null;
+        }
+        coinCounter.AddPlayerCounter(conn);
+    }
     
     
 }

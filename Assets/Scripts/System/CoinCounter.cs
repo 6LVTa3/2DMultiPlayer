@@ -22,7 +22,7 @@ public class CoinCounter : NetworkBehaviour
 
 
     }
-    private void Start()
+    private void Awake()
     {
 
             playerScores = new Dictionary<NetworkConnectionToClient, int>();
@@ -32,9 +32,9 @@ public class CoinCounter : NetworkBehaviour
   
    public void AddPlayerCounter(NetworkConnectionToClient client)
     {
-   
-            playerScores.Add(client, 0);
-            Debug.Log(playerScores);
+        Debug.Log(playerScores);
+        playerScores.Add(client, 0);
+        Debug.Log(playerScores);
        
     }
 

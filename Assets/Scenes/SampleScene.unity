@@ -189,6 +189,8 @@ MonoBehaviour:
   - {fileID: 2521890692020894247, guid: 34eb7ecb9b436c84e9fe46cadf9d33f4, type: 3}
   - {fileID: 7984613657176863859, guid: bfcf3a6a695b1c54d809516eec64050e, type: 3}
   - {fileID: 3981888956040042821, guid: e9649268569847f42a97c7e126d8ca43, type: 3}
+  - {fileID: 3477559312826753583, guid: 9f332cbad52bcc54c8369300a7dcdd87, type: 3}
+  - {fileID: 2449529778906175742, guid: be09eaeba6c949b478e880e10a2e5cea, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -207,6 +209,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   coinCounterPrefab: {fileID: 1009663817743354738, guid: e9649268569847f42a97c7e126d8ca43, type: 3}
   coinEmmiterPrefab: {fileID: 7560564948552516929, guid: bfcf3a6a695b1c54d809516eec64050e, type: 3}
+  enemyEmmiterPrefab: {fileID: 0}
 --- !u!114 &502883815
 MonoBehaviour:
   m_ObjectHideFlags: 0
